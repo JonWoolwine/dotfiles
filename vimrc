@@ -76,12 +76,6 @@ nnoremap <leader>z za
 " ack last searched string @todo
 "nnoremap <leader>A y:Ack "@/"<cr>
 
-" fast comments
-augroup filetype_comments
-    autocmd BufNewFile,BufRead *.cpp,*.h nnoremap <buffer> <localleader>c I//<esc> 
-"    autocmd BufNewFile,BufRead *.cpp,*.h vnoremap <buffer> <localleader>* <esc>`<i/*<esc>`>a*/<esc>
-augroup END
-
 augroup filetype_comments
     autocmd BufNewFile,BufRead *.cpp,*.h,*.xml set foldmethod=syntax
     autocmd BufNewFile,BufRead *.* normal zR
