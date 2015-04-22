@@ -3,6 +3,7 @@
         ~/.dotfiles: ''
         ~/.bashrc: bashrc
         ~/.gdbinit: gdbinit
+        ~/.gitconfig: gitconfig
         ~/.tmux.conf: tmux.conf
         ~/.tmux: tmux/
         ~/.vimrc: vimrc
