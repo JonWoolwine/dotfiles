@@ -2,6 +2,7 @@
 - link: 
         ~/.dotfiles: ''
         ~/.bashrc: bashrc
+        ~/.gdbinit: gdbinit
         ~/.tmux.conf: tmux.conf
         ~/.tmux: tmux/
         ~/.vimrc: vimrc
