@@ -45,8 +45,6 @@ nnoremap <leader>mm :wa<cr> :make -j12<cr>
 nnoremap <leader>mc :wa<cr> :make check -j12<cr>
 
 " toggle ninja
-nnoremap <leader>n :set makeprg=/spot/dev/3rdParty/cpp/misc/ninja/ninja-1.5.1/gcc-4.9.1/bin/ninja\ -C\ out/Release\ all<cr>
-nnoremap <leader>d :set makeprg=/spot/dev/3rdParty/cpp/misc/ninja/ninja-1.5.1/gcc-4.9.1/bin/ninja\ -C\ out/Debug\ all<cr>
 nnoremap <leader>N :set makeprg=make<cr>
 
 " swap lines
@@ -81,24 +79,6 @@ augroup filetype_comments
     autocmd BufNewFile,BufRead *.* normal zR
 augroup END
 
-function! SetNinja()
-    if !empty(glob("*.gyp"))
-        set makeprg=/spot/dev/3rdParty/cpp/misc/ninja/ninja-v1.4.0/gcc-4.7.3/bin/ninja\ -C\ out/Release\ all
-    endif
-endfunction
-
-function! SetHegemonSettings()
-    if !empty(glob("hegemon.gyp"))
-        set shiftwidth=2
-        set ts=2
-    endif
-endfunction
-
-augroup filetype_make
-    autocmd BufNewFile,BufRead *.cpp,*.h call SetNinja()
-    autocmd BufNewFile,BufRead *.cpp,*.h call SetHegemonSettings()
-augroup END
-
 nnoremap <leader>R :!./run_tests.sh 
 
 " operator parens, brackets, quotes
@@ -123,7 +103,7 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 
 "let g:clang_exec = "~/build/Debug+Asserts/bin/clang"
 "let g:clang_diagsopt = "b:rightbelow:6"
-"let g:clang_library_path = "/home/jon.woolwine/linux/build/Debug+Asserts/lib/libclang.so"
+"let g:clang_library_path = "/home/libclang.so"
 
 set ls=2
 
@@ -180,7 +160,7 @@ function! ToggleAutoComplete()
     endif
 endfunction
 
-let g:ConqueGdb_GdbExe = '/spot/dev/3rdParty/cpp/gnu/gcc/gcc-4.9.1/bin/gdb'
+let g:ConqueGdb_GdbExe = 'gdb'
 
 nnoremap <leader>C :call ColorToggle()<cr>
 
