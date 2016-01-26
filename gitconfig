@@ -1,5 +1,5 @@
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [user]
-	email = jon.woolwine@spottradingllc.com
+	email = jon.woolwine@gmail.com
 	name = jon.woolwine
