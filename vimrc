@@ -17,7 +17,6 @@ set expandtab
 set splitright
 
 set hlsearch
-set relativenumber
 
 " spelling errors
 iabbrev qutoe quote
@@ -72,7 +71,7 @@ nnoremap <leader>T :match<cr>
 nnoremap <leader>z za
 
 " ack last searched string @todo
-"nnoremap <leader>A y:Ack "@/"<cr>
+nnoremap <leader>A y:Ack "@/"<cr>
 
 augroup filetype_comments
     autocmd BufNewFile,BufRead *.cpp,*.h,*.xml set foldmethod=syntax
@@ -162,6 +161,20 @@ endfunction
 
 let g:ConqueGdb_GdbExe = 'gdb'
 
-nnoremap <leader>C :call ColorToggle()<cr>
-
 let g:desert_on = 0
+
+nnoremap <leader>q :call QuickfixToggle()<cr>
+
+let g:quickfix_is_open = 0
+
+function! QuickfixToggle()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+        execute g:quickfix_return_to_window . "wincmd w"
+    else
+        let g:quickfix_return_to_window = winnr()
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
