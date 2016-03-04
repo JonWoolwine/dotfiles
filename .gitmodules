@@ -43,3 +43,6 @@
 [submodule "vim/bundle/Conque-GDB"]
 	path = vim/bundle/Conque-GDB
 	url = https://github.com/vim-scripts/Conque-GDB.git
+[submodule "vim/bundle/pydiction"]
+	path = vim/bundle/pydiction
+	url = https://github.com/rkulla/pydiction.git

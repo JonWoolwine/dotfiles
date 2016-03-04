@@ -6,7 +6,10 @@ filetype plugin indent on
 let mapleader=","
 let maplocalleader=","
 
+color desert
+
 set number
+set relativenumber
 set tags+=/usr/local/share/ctags/qt4
 set mouse=a
 
@@ -31,17 +34,20 @@ inoremap <c-u> <esc>vbU
 " switch between .h/.cpp
 nnoremap <leader>a :A<CR>
 
+" fast comment
+nnoremap <leader>d I//<esc>
+
 " tab complete
 inoremap <tab> <c-n>
 
 " vimrc controls
-nnoremap <leader>ev :vsplit $MYVIMRC<cr> 
-nnoremap <leader>sv :source $MYVIMRC<cr> 
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " fast make
 nnoremap <leader>m :wa<cr> :Make<cr>
-nnoremap <leader>mm :wa<cr> :make -j12<cr>
-nnoremap <leader>mc :wa<cr> :make check -j12<cr>
+nnoremap <leader>mm :wa<cr> :Make -j12<cr>
+nnoremap <leader>mc :wa<cr> :Make check -j12<cr>
 
 " toggle ninja
 nnoremap <leader>N :set makeprg=make<cr>
@@ -52,6 +58,9 @@ nnoremap - ddp
 
 " swap words
 nnoremap <leader>s- dwwP
+
+" highlight trailing spaces
+nnoremap <leader>S /\s\+$<cr>
 
 " fast semicolon
 nnoremap <leader>; mqA;<esc>`q
@@ -73,12 +82,16 @@ nnoremap <leader>z za
 " ack last searched string @todo
 nnoremap <leader>A y:Ack "@/"<cr>
 
+" ack word under cursor
+nnoremap <leader>g :Ack "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 augroup filetype_comments
     autocmd BufNewFile,BufRead *.cpp,*.h,*.xml set foldmethod=syntax
     autocmd BufNewFile,BufRead *.* normal zR
 augroup END
 
-nnoremap <leader>R :!./run_tests.sh 
+nnoremap <leader>B :!./build.sh
+nnoremap <leader>R :!./run.sh 
 
 " operator parens, brackets, quotes
 onoremap p i(
@@ -178,3 +191,11 @@ function! QuickfixToggle()
         let g:quickfix_is_open = 1
     endif
 endfunction
+
+"pydiction
+let g:pydiction_location = '/home/jwoolwine/.vim/bundle/pydiction/complete-dict'
+inoremap <C-n> <C-x><C-o>
+
+"flake
+let g:flake8_show_in_gutter = 1
+let g:flake8_show_in_file = 1
