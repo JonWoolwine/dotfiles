@@ -584,3 +584,4 @@ set print vtbl on
 set print demangle on
 set demangle-style gnu-v3
 set print sevenbit-strings off
+add-auto-load-safe-path /opt/gcc/lib64/libstdc++.so.6.0.19-gdb.py

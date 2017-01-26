@@ -21,6 +21,9 @@ set splitright
 
 set hlsearch
 
+" paste mode
+set pastetoggle=<F10>
+
 " spelling errors
 iabbrev qutoe quote
 iabbrev reposne response
@@ -72,6 +75,9 @@ nnoremap <c-k> <c-w><c-k>
 nnoremap <c-l> <c-w><c-l>
 nnoremap <c-h> <c-w><c-h>
 
+" fast tab navigation
+nnoremap <leader><tab> :tabnext<cr>
+
 " highlight tabs
 nnoremap <leader>t :match Error #\t#<cr>
 nnoremap <leader>T :match<cr>
@@ -87,11 +93,11 @@ nnoremap <leader>g :Ack "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 augroup filetype_comments
     autocmd BufNewFile,BufRead *.cpp,*.h,*.xml set foldmethod=syntax
+    autocmd BufNewFile,BufRead *.py,*.h,*.xml set foldmethod=indent
     autocmd BufNewFile,BufRead *.* normal zR
 augroup END
 
 nnoremap <leader>B :!./build.sh
-nnoremap <leader>R :!./run.sh 
 
 " operator parens, brackets, quotes
 onoremap p i(
@@ -107,7 +113,7 @@ vnoremap <leader>r y:%s/<c-r>"/
 highlight Pmenu ctermfg=1 ctermbg=white guibg=grey30
 
 augroup filetype
-  au! BufRead,BufNewFile *.proto setfiletype proto
+au! BufRead,BufNewFile *.proto setfiletype proto
 augroup end
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
@@ -134,21 +140,21 @@ set wildignore+=*.o,*/out/*
 
 let g:LargeFile = 1024 * 1024 * 10
 augroup LargeFile
-    autocmd BufReadPre * let f=expand("<afile>") | if getfsize(f) > g:LargeFile | set eventignore+=FileType | setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 | else | set eventignore-=FileType | endif
+autocmd BufReadPre * let f=expand("<afile>") | if getfsize(f) > g:LargeFile | set eventignore+=FileType | setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 | else | set eventignore-=FileType | endif
 augroup END
 
 let g:ycm_filetype_blacklist = {
-    \ 'tagbar' : 1,
-    \ 'qf' : 1,
-    \ 'notes' : 1,
-    \ 'markdown' : 1,
-    \ 'text' : 1,
-    \ 'vimwiki' : 1,
-    \ 'pandoc' : 1,
-    \ 'infolog' : 1,
-    \ 'mail' : 1,
-    \ 'cpp' : 1,
-    \}
+\ 'tagbar' : 1,
+\ 'qf' : 1,
+\ 'notes' : 1,
+\ 'markdown' : 1,
+\ 'text' : 1,
+\ 'vimwiki' : 1,
+\ 'pandoc' : 1,
+\ 'infolog' : 1,
+\ 'mail' : 1,
+\ 'cpp' : 1,
+\}
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_allow_changing_updatetime = 0
@@ -165,11 +171,11 @@ map <F12> :YcmCompleter GoToImprecise<CR>
 map <leader>o :call ToggleAutoComplete()<CR>
 
 function! ToggleAutoComplete()
-    if g:ycm_auto_trigger
-        let g:ycm_auto_trigger = 0
-    else
-        let g:ycm_auto_trigger = 1
-    endif
+if g:ycm_auto_trigger
+    let g:ycm_auto_trigger = 0
+else
+    let g:ycm_auto_trigger = 1
+endif
 endfunction
 
 let g:ConqueGdb_GdbExe = 'gdb'
@@ -181,15 +187,15 @@ nnoremap <leader>q :call QuickfixToggle()<cr>
 let g:quickfix_is_open = 0
 
 function! QuickfixToggle()
-    if g:quickfix_is_open
-        cclose
-        let g:quickfix_is_open = 0
-        execute g:quickfix_return_to_window . "wincmd w"
-    else
-        let g:quickfix_return_to_window = winnr()
-        copen
-        let g:quickfix_is_open = 1
-    endif
+if g:quickfix_is_open
+    cclose
+    let g:quickfix_is_open = 0
+    execute g:quickfix_return_to_window . "wincmd w"
+else
+    let g:quickfix_return_to_window = winnr()
+    copen
+    let g:quickfix_is_open = 1
+endif
 endfunction
 
 "pydiction
@@ -199,3 +205,5 @@ inoremap <C-n> <C-x><C-o>
 "flake
 let g:flake8_show_in_gutter = 1
 let g:flake8_show_in_file = 1
+
+nnoremap <leader>R :wa<cr> :!python %<cr>
